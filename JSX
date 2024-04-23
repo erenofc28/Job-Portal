@@ -1,0 +1,139 @@
+import { useState } from 'react';
+import './jobPortal.css'
+
+function JobPortal(){
+    const [location,setLocation]=useState("");
+    const [salary,setSalary]=useState("5000");
+    const [jobType,setJobType]=useState("");
+   const [details,setDetails] =useState([
+     {title:"Full Stack Developer",type:"full time",location:"tiruchy",salary:"30000"},
+       { title:"UI/UX Designer",type:"full time",location:"chennai",salary:"20000"},
+       {title:"Game Developer",type:"part time",location:"madurai",salary:"15000"} 
+    ])
+
+
+    const [gta,setGta]=useState([]);
+
+
+
+
+    const editfilter=()=>{
+
+        const bully =  
+        
+        details.filter((data)=>{
+
+            if(data.location == location.toLocaleLowerCase())
+            {
+              
+            //     <div className="jobs">
+            //     <h3>{data.title}</h3>
+            //     <p>Type : {data.type} </p>
+            //     <p>Location : {data.location}</p>
+            //     <p>Salary : {data.salary}</p>
+            //     </div>
+            //    <hr />
+            return data.location;
+   
+            }
+            if(data.salary == salary)
+            {
+               return data.salary;
+            }
+            if(data.type == jobType.toLocaleLowerCase())
+            {
+               return data.type;
+            }
+   
+        })
+   
+          setGta((bully.map((a)=> a)));
+       
+
+
+    }
+ 
+
+    console.log(gta)
+
+
+ 
+const var_location =""
+
+
+
+if(location.toLocaleLowerCase() === "madurai")
+{
+
+}
+
+
+ 
+    return(
+        <>
+           <div className="list">
+
+            <h1 className='job-finder'>Job Seeker</h1>
+           
+
+
+        {
+
+            gta.map((d)=>{
+                // console.log(d.type);
+               return(
+                <>
+                  <div className="jobs">
+                  <h3>{d.title}</h3>
+                  <p>Type : {d.type} </p>
+                  <p>Location : {d.location}</p>
+                  <p>Salary : {d.salary}</p>
+                  </div>
+                 <hr />
+
+                </>
+
+                
+               ) 
+            })
+        }
+
+          
+
+
+    
+
+        <div className="filters">
+            <label htmlFor="">Job Type :</label>
+            <select className='select-btn' onChange={(e)=>{
+              
+                setJobType(e.target.value);
+            }}>
+                <option value="All">All</option>
+                <option value="Full Time">Full Time</option>
+                <option value="Part Time">Part Time</option>
+            </select>
+
+            <label htmlFor="">Location :</label>
+            <input type="text" onChange={(e)=>{
+                setLocation(e.target.value);
+            }} />
+
+            <label htmlFor="">Salary Range :</label>
+            <input type="range" min={0} max={100000} step={5000} onChange={(e)=>{
+                setSalary(e.target.value)
+                }}/>
+            <span>{salary}</span>
+
+
+       <button onClick={editfilter}>Apply Filters</button>
+            
+        </div>
+
+        </div>
+        </>
+         )
+          }
+
+
+export default JobPortal;
